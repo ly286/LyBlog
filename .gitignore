@@ -31,3 +31,27 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Maven 缓存文件
+.mvn/
+mvnw
+mvnw.cmd
+
+# 日志文件
+*.log
+logs/
+*.out
+
+# Linux/mac 临时文件
+*.swp
+.DS_Store
+
+# Spring Boot 可执行 jar
+*.jar
+*.war
+*.exec
+
+
+**/application-*.yml
+**/application-*.properties
+

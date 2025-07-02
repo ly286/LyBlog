@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ly</groupId>
-        <artifactId>LyBlog</artifactId>
+        <artifactId>lyblog</artifactId>
         <version>${revision}</version>
     </parent>
 

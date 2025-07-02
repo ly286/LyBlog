@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.ly</groupId>
-    <artifactId>LyBlog</artifactId>
+    <artifactId>lyblog</artifactId>
     <version>${revision}</version>
-    <name>LyBlog</name>
-    <description>LyBlog</description>
+    <name>lyblog</name>
+    <description>lyblog</description>
 
     <packaging>pom</packaging>
 
@@ -42,6 +42,7 @@
         <lombok.version>1.18.38</lombok.version>
         <guava.version>33.4.8-jre</guava.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
+        <jackson.version>2.19.1</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -70,6 +71,18 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
 
         </dependencies>
 

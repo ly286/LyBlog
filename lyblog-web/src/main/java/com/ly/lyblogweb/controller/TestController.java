@@ -1,6 +1,7 @@
 package com.ly.lyblogweb.controller;
 
 import com.ly.lyblogcommon.aspect.ApiOperationLog;
+import com.ly.lyblogcommon.utils.Result;
 import com.ly.lyblogweb.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,20 +26,9 @@ public class TestController {
 
     @PostMapping("/test")
     @ApiOperationLog(description = "测试接口")
-    public ResponseEntity<String> test(@RequestBody @Validated User user, BindingResult bindingResult) {
-        // 是否存在校验错误
-        if (bindingResult.hasErrors()) {
-            // 获取校验不通过字段的提示信息
-            String errorMsg = bindingResult.getFieldErrors()
-                    .stream()
-                    .map(FieldError::getDefaultMessage)
-                    .collect(Collectors.joining(", "));
-
-            return ResponseEntity.badRequest().body(errorMsg);
-        }
-
-        // 返参
-        return ResponseEntity.ok("参数没有任何问题");
+    public Result<Void> test(@RequestBody @Validated User user) {
+        int i = 1 / 0; // 测试全局异常捕获
+        return Result.success();
     }
 
 }

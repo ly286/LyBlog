@@ -7,6 +7,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 /**
  * @Author: dly
  * @Date: 2025-07-03-0:32
@@ -36,4 +40,16 @@ public class User {
     @NotNull(message = "邮箱不能为空")
     @Email(message = "邮箱格式不正确")
     private String email;
+
+    // 创建时间
+    private LocalDateTime createTime;
+
+    // 更新时间
+    private LocalDateTime updateTime;
+
+    //日期
+    private LocalDate Date;
+
+    // 时间
+    private LocalTime time;
 }

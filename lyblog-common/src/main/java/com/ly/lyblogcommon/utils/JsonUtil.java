@@ -19,6 +19,7 @@ public class JsonUtil {
             return INSTANCE.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             return obj.toString();
+            
         }
     }
 }

@@ -55,3 +55,4 @@ logs/
 **/application-*.yml
 **/application-*.properties
 
+lyblog-web/src/main/resources/application-dev.yml

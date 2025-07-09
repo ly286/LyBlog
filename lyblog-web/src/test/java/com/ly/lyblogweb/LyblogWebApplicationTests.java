@@ -34,7 +34,7 @@ class LyblogWebApplicationTests {
     void insertTest() {
         // 构建数据库实体类
         UserDO userDO = UserDO.builder()
-                .username("ly")
+                .username("lly")
                 .password("123456")
                 .createTime(new Date())
                 .updateTime(new Date())

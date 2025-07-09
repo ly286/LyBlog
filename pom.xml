@@ -46,6 +46,7 @@
         <spring-doc.version>2.8.9</spring-doc.version>
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <mysql.version>8.0.33</mysql.version>
+        <p6spy.version>3.9.1</p6spy.version>
 
     </properties>
 
@@ -118,6 +119,13 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <!--p6spy-->
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
             </dependency>
 
 

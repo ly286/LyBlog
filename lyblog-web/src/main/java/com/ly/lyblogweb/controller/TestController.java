@@ -47,7 +47,7 @@ public class TestController {
     }
 
 
-    @PostMapping("/test2")
+    @PostMapping("/admin/test2")
     @ApiOperationLog(description = "测试接口")
     @Operation(summary = "测试接口2", description = "测试接口描述2")
     public Result test2(@RequestBody @Validated User user) {

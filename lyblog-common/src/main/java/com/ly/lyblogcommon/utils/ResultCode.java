@@ -14,7 +14,9 @@ public enum ResultCode {
     FAILED(500, "操作失败"),
     VALIDATE_FAILED(400, "参数检验失败"),
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
-    FORBIDDEN(403, "没有相关权限");
+    FORBIDDEN(403, "没有相关权限"),
+    LOGIN_FAIL(20000, "登录失败"),
+    USERNAME_OR_PWD_ERROR(20001, "用户名或密码错误");
 
     private final int code;
     private final String message;

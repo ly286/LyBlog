@@ -5,13 +5,9 @@ import com.ly.lyblogcommon.utils.JsonUtil;
 import com.ly.lyblogcommon.utils.Result;
 import com.ly.lyblogweb.model.User;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.stream.Collectors;
 
 /**
  * @Author: dly
@@ -60,6 +55,15 @@ public class TestController {
         user.setTime(LocalTime.now());
 
         return Result.success(user);
+    }
+
+    @PostMapping("/admin/update")
+    @ApiOperationLog(description = "测试更新接口")
+    @Operation(summary = "测试更新接口", description = "测试更新接口描述")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Result testUpdate() {
+        log.info("更新成功...");
+        return Result.success();
     }
 
 

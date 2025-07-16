@@ -5,6 +5,7 @@ package com.ly.lyblogcommon.exception;
  * @Date: 2025-07-05-0:21
  * @Description:
  */
+
 import com.ly.lyblogcommon.utils.Result;
 import com.ly.lyblogcommon.utils.ResultCode;
 import org.slf4j.Logger;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import org.springframework.security.access.AccessDeniedException;
+
 
 /**
  * 全局异常处理器
@@ -64,6 +68,15 @@ public class GlobalExceptionHandler {
     public Result<Void> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
         log.warn("缺少请求参数: {}", ex.getParameterName());
         return Result.failed(ResultCode.VALIDATE_FAILED, "缺少必要参数：" + ex.getParameterName());
+    }
+
+    /**
+     * 处理鉴权失败
+     */
+    @ExceptionHandler({ AccessDeniedException.class })
+    public Result<Void> handleAccessDeniedException(AccessDeniedException ex) {
+        log.warn("鉴权失败: {}", ex.getMessage());
+        return Result.failed(ResultCode.FORBIDDEN, "鉴权失败");
     }
 
 

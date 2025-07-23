@@ -7,8 +7,11 @@ package com.ly.lyblogweb.config;
  */
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,8 +27,17 @@ import org.springframework.context.annotation.Profile;
         ),
         servers = {
                 @Server(url = "http://localhost:8080", description = "本地环境")
-        }
+        },
+        security = @SecurityRequirement(name = "Authorization")  // 全局应用安全配置
 )
+@SecurityScheme(
+        name = "Authorization",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT",
+        description = "输入JWT Token：Bearer {token}"
+)
+
 public class OpenApiConfig {
 }
 

@@ -2,6 +2,7 @@ package com.ly.lyblogadmin.config;
 
 import com.ly.lyblogsecurity.filter.JwtAuthenticationFilter;
 import com.ly.lyblogsecurity.filter.TokenAuthenticationFilter;
+import com.ly.lyblogsecurity.handler.RestAuthenticationEntryPoint;
 import com.ly.lyblogsecurity.handler.RestAuthenticationFailureHandler;
 import com.ly.lyblogsecurity.handler.RestAuthenticationSuccessHandler;
 import com.ly.lyblogsecurity.utils.JwtTokenHelper;
@@ -61,12 +62,16 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    JwtAuthenticationFilter jwtAuthenticationFilter,
-                                                   TokenAuthenticationFilter tokenAuthenticationFilter) throws Exception {
+                                                   TokenAuthenticationFilter tokenAuthenticationFilter,
+                                                   RestAuthenticationEntryPoint restAuthenticationEntryPoint) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // 禁用 CSRF
                 .formLogin(form -> form.disable()) // 禁用表单登录
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 前后端分离，无需 session
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(restAuthenticationEntryPoint)  // 自定义异常处理
+                )
                 .authenticationProvider(daoAuthenticationProvider) // 注册 DaoAuthenticationProvider
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // 注册 JWT 登录 Filter
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // 注册 Token 登录 Filter, 在 JWT 登录 Filter 后面

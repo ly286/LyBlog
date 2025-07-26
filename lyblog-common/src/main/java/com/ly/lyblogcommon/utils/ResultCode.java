@@ -17,7 +17,9 @@ public enum ResultCode {
     FORBIDDEN(403, "没有相关权限"),
     LOGIN_FAIL(20000, "登录失败"),
     USERNAME_OR_PWD_ERROR(20001, "用户名或密码错误"),
-    USERNAME_NOT_FOUND(20003, "该用户不存在");
+    USERNAME_NOT_FOUND(20003, "该用户不存在"),
+    CATEGORY_NAME_IS_EXISTED(20005, "该分类已存在，请勿重复添加！");
+
 
 
 

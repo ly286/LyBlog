@@ -1,6 +1,6 @@
 package com.ly.lyblogadmin.service;
 
-import com.ly.lyblogadmin.model.UpdateAdminUserPasswordReqVO;
+import com.ly.lyblogadmin.model.vo.user.UpdateAdminUserPasswordReqVO;
 import com.ly.lyblogcommon.utils.Result;
 
 /**
@@ -15,5 +15,11 @@ public interface AdminUserService {
      * @return
      */
     Result updatePassword(UpdateAdminUserPasswordReqVO updateAdminUserPasswordReqVO);
+
+    /**
+     * 获取当前登录用户信息
+     * @return
+     */
+    Result findUserInfo();
 }
 

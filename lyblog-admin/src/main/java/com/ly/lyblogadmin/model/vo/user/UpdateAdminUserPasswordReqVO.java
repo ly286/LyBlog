@@ -1,4 +1,4 @@
-package com.ly.lyblogadmin.model;
+package com.ly.lyblogadmin.model.vo.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

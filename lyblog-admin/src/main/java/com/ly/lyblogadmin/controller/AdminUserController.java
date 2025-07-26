@@ -1,6 +1,6 @@
 package com.ly.lyblogadmin.controller;
 
-import com.ly.lyblogadmin.model.UpdateAdminUserPasswordReqVO;
+import com.ly.lyblogadmin.model.vo.user.UpdateAdminUserPasswordReqVO;
 import com.ly.lyblogadmin.service.AdminUserService;
 import com.ly.lyblogcommon.aspect.ApiOperationLog;
 import com.ly.lyblogcommon.utils.Result;
@@ -32,5 +32,14 @@ public class AdminUserController {
     public Result updatePassword(@RequestBody @Validated UpdateAdminUserPasswordReqVO updateAdminUserPasswordReqVO) {
         return userService.updatePassword(updateAdminUserPasswordReqVO);
     }
+
+
+    @PostMapping("/user/info")
+    @Operation(summary = "获取用户信息", description = "获取用户信息")
+    @ApiOperationLog(description = "获取用户信息")
+    public Result findUserInfo() {
+        return userService.findUserInfo();
+    }
+
 }
 

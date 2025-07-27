@@ -2,13 +2,15 @@ package com.ly.lyblogadmin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListReqVO;
 import com.ly.lyblogadmin.model.vo.category.AddCategoryReqVO;
+import com.ly.lyblogadmin.model.vo.category.DeleteCategoryReqVO;
+import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListReqVO;
 import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListRspVO;
 import com.ly.lyblogadmin.service.AdminCategoryService;
 import com.ly.lyblogcommon.domain.dos.CategoryDO;
 import com.ly.lyblogcommon.domain.mapper.CategoryMapper;
 import com.ly.lyblogcommon.exception.ServiceException;
+import com.ly.lyblogcommon.model.vo.SelectRspVO;
 import com.ly.lyblogcommon.utils.PageResult;
 import com.ly.lyblogcommon.utils.Result;
 import com.ly.lyblogcommon.utils.ResultCode;
@@ -110,6 +112,50 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
         }
 
         return PageResult.successFrom(categoryDOPage, vos);
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param deleteCategoryReqVO
+     * @return
+     */
+    @Override
+    public Result deleteCategory(DeleteCategoryReqVO deleteCategoryReqVO) {
+        // 分类 ID
+        Long categoryId = deleteCategoryReqVO.getId();
+
+        // 删除分类
+        categoryMapper.deleteById(categoryId);
+
+        return Result.success();
+    }
+
+
+    /**
+     * 查询所有分类
+     *
+     * @return
+     */
+    @Override
+    public Result findCategorySelectList() {
+        // 查询所有分类
+        List<CategoryDO> categoryDOS = categoryMapper.selectList(null);
+
+        // DO 转 VO
+        List<SelectRspVO> selectRspVOS = null;
+        // 如果分类数据不为空
+        if (!CollectionUtils.isEmpty(categoryDOS)) {
+            // 将分类 ID 作为 Value 值，将分类名称作为 label 展示
+            selectRspVOS = categoryDOS.stream()
+                    .map(categoryDO -> SelectRspVO.builder()
+                            .label(categoryDO.getName())
+                            .value(categoryDO.getId())
+                            .build())
+                    .collect(Collectors.toList());
+        }
+
+        return Result.success(selectRspVOS);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ly.lyblogadmin.controller;
 
 import com.ly.lyblogadmin.model.vo.category.AddCategoryReqVO;
+import com.ly.lyblogadmin.model.vo.category.DeleteCategoryReqVO;
 import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListReqVO;
 import com.ly.lyblogadmin.service.AdminCategoryService;
 import com.ly.lyblogcommon.aspect.ApiOperationLog;
@@ -43,4 +44,20 @@ public class AdminCategoryController {
     public PageResult findCategoryList(@RequestBody @Validated FindCategoryPageListReqVO findCategoryPageListReqVO) {
         return categoryService.findCategoryList(findCategoryPageListReqVO);
     }
+
+    @PostMapping("/category/delete")
+    @Operation(summary = "删除分类", description = "删除分类描述")
+    @ApiOperationLog(description = "删除分类")
+    public Result deleteCategory(@RequestBody @Validated DeleteCategoryReqVO deleteCategoryReqVO) {
+        return categoryService.deleteCategory(deleteCategoryReqVO);
+    }
+
+    @PostMapping("/category/select/list")
+    @ApiOperation(value = "分类 Select 下拉列表数据获取")
+    @ApiOperationLog(description = "分类 Select 下拉列表数据获取")
+    public Result findCategorySelectList() {
+        return categoryService.findCategorySelectList();
+    }
+
+
 }

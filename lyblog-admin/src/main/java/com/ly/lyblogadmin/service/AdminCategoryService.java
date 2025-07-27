@@ -1,6 +1,8 @@
 package com.ly.lyblogadmin.service;
 
+import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListReqVO;
 import com.ly.lyblogadmin.model.vo.category.AddCategoryReqVO;
+import com.ly.lyblogcommon.utils.PageResult;
 import com.ly.lyblogcommon.utils.Result;
 
 /**
@@ -15,4 +17,11 @@ public interface AdminCategoryService {
      * @return
      */
     Result addCategory(AddCategoryReqVO addCategoryReqVO);
+
+    /**
+     * 分类分页数据查询
+     * @param findCategoryPageListReqVO
+     * @return
+     */
+    PageResult findCategoryList(FindCategoryPageListReqVO findCategoryPageListReqVO);
 }

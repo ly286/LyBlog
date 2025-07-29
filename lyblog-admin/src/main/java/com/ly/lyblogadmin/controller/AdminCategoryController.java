@@ -5,6 +5,7 @@ import com.ly.lyblogadmin.model.vo.category.DeleteCategoryReqVO;
 import com.ly.lyblogadmin.model.vo.category.FindCategoryPageListReqVO;
 import com.ly.lyblogadmin.service.AdminCategoryService;
 import com.ly.lyblogcommon.aspect.ApiOperationLog;
+import com.ly.lyblogcommon.model.vo.SelectRspVO;
 import com.ly.lyblogcommon.utils.PageResult;
 import com.ly.lyblogcommon.utils.Result;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Author: dly
@@ -53,9 +56,9 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/category/select/list")
-    @ApiOperation(value = "分类 Select 下拉列表数据获取")
+    @Operation(summary = "分类 Select 下拉列表数据获取", description = "分类 Select 下拉列表数据获取描述")
     @ApiOperationLog(description = "分类 Select 下拉列表数据获取")
-    public Result findCategorySelectList() {
+    public Result<List<SelectRspVO>> findCategorySelectList() {
         return categoryService.findCategorySelectList();
     }
 

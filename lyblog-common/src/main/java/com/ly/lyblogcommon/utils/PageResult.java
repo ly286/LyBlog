@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: dly
@@ -51,10 +52,10 @@ public class PageResult<T> extends Result<List<T>> {
 
     public static <T, R> PageResult<R> successFrom(IPage<T> page, List<R> data) {
         PageResult<R> result = new PageResult<>();
-        result.setTotal(page.getTotal());
-        result.setSize(page.getSize());
-        result.setCurrent(page.getCurrent());
-        result.setPages(page.getPages());
+        result.setTotal(Objects.isNull(page) ? 0L : page.getTotal());
+        result.setSize(Objects.isNull(page) ? 10L : page.getSize());
+        result.setCurrent(Objects.isNull(page) ? 1L : page.getCurrent());
+        result.setPages(Objects.isNull(page) ? 0L : page.getPages());
         result.setData(data);
         return result;
     }

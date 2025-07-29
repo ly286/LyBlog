@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -88,10 +90,21 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
         LocalDate startDate = findCategoryPageListReqVO.getStartDate();
         LocalDate endDate = findCategoryPageListReqVO.getEndDate();
 
+
+        LocalDateTime startDateTime = null;
+        LocalDateTime endDateTime = null;
+
+        if (Objects.nonNull(startDate)) {
+            startDateTime = startDate.atStartOfDay(); // 00:00:00
+        }
+        if (Objects.nonNull(endDate)) {
+            endDateTime = endDate.atTime(LocalTime.MAX); // 23:59:59.999
+        }
+
         wrapper
                 .like(StringUtils.isNotBlank(name), CategoryDO::getName, name.trim()) // like 模块查询
-                .ge(Objects.nonNull(startDate), CategoryDO::getCreateTime, startDate) // 大于等于 startDate
-                .le(Objects.nonNull(endDate), CategoryDO::getCreateTime, endDate)  // 小于等于 endDate
+                .ge(Objects.nonNull(startDate), CategoryDO::getCreateTime, startDateTime) // 大于等于 startDate
+                .le(Objects.nonNull(endDate), CategoryDO::getCreateTime, endDateTime)  // 小于等于 endDate
                 .orderByDesc(CategoryDO::getCreateTime); // 按创建时间倒叙
 
         // 执行分页查询
@@ -138,7 +151,7 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
      * @return
      */
     @Override
-    public Result findCategorySelectList() {
+    public Result<List<SelectRspVO>> findCategorySelectList() {
         // 查询所有分类
         List<CategoryDO> categoryDOS = categoryMapper.selectList(null);
 
